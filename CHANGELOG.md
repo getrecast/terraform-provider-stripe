@@ -1,3 +1,7 @@
+## 3.4.1
+* BUGFIXES:
+  * Resource file sets links properly
+
 ## 3.4.0
 * NOTES
   * Removal of resources is united based on Stripe API.
