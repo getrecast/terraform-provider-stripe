@@ -855,5 +855,5 @@ func resourceStripePriceUpdate(ctx context.Context, d *schema.ResourceData, m in
 
 func resourceStripePriceDelete(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
 	tflog.Error(ctx, "Stripe API doesn't support deletion of prices")
-	return diag.Errorf("Stripe API doesn't support deletion of prices. Please set active = false before removing the price from your configuration.")
+	return diag.Errorf("Stripe API doesn't support deletion of prices. You may set active = false to deactivate the price, or manually remove the price from Stripe, Terraform state, and the Terraform configuration.")
 }
