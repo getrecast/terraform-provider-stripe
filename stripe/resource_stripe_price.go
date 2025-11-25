@@ -854,7 +854,6 @@ func resourceStripePriceUpdate(ctx context.Context, d *schema.ResourceData, m in
 }
 
 func resourceStripePriceDelete(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	tflog.Warn(ctx, "[WARN] Stripe API doesn't support deletion of promotion code")
-	d.SetId("")
-	return nil
+	tflog.Error(ctx, "Stripe API doesn't support deletion of prices")
+	return diag.Errorf("Stripe API doesn't support deletion of prices. Please set active = false before removing the price from your configuration.")
 }
