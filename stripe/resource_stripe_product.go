@@ -323,26 +323,15 @@ func resourceStripeProductUpdate(ctx context.Context, d *schema.ResourceData, m 
 }
 
 func resourceStripeProductDelete(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	tflog.Warn(ctx, "[WARN] Deleting a product is only possible if it has no prices associated with it.")
-
 	c := m.(*client.API)
 	var err error
 
 	err = retryWithBackOff(func() error {
 		_, err = c.Products.Del(d.Id(), nil)
-		if err != nil {
-			stripeErr := toStripeError(err)
-			/*
-				When ErrorTypeInvalidRequest error is returned on delete endpoint (price resources were attached)
-				the product is kept as it is.
-			*/
-			if stripeErr.Type == stripe.ErrorTypeInvalidRequest {
-				return nil
-			}
-		}
 		return err
 	})
 	if err != nil {
+		tflog.Error(ctx, "Failed to delete product. Deleting a product is only possible if it has no prices associated with it.")
 		return diag.FromErr(err)
 	}
 
