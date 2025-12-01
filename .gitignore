@@ -8,6 +8,11 @@
 *.so
 *.dylib
 
+# Terraform provider binaries (built locally or downloaded)
+terraform-provider-stripe
+terraform-provider-stripe-*
+terraform-provider-stripe_*
+
 # Test binary, built with `go test -c`
 *.test
 
